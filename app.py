@@ -147,9 +147,9 @@ Return ONLY JSON: {"intent": "list"|"settle"|"other", "customer": string|null,
 @st.cache_data(ttl=3600, show_spinner=False)
 def understand(sentence):
     cfg = connect()["client"].config
-    key = os.environ.get("GROQ_API_KEY") or cfg.get("groq_api_key")
+    key = os.environ.get("GROQ_API_KEY") or cfg.get("groq_api_key") or cfg.get("GROQ_API_KEY")
     if not key and hasattr(st, "secrets"):
-        key = st.secrets.get("groq_api_key")
+        key = st.secrets.get("groq_api_key") or st.secrets.get("GROQ_API_KEY")
     if not key:
         raise RuntimeError("Set GROQ_API_KEY in environment or Streamlit secrets.")
 
