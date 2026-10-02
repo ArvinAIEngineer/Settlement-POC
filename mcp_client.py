@@ -48,7 +48,7 @@ class BusinessCentralMCPClient:
         if HAS_STREAMLIT and hasattr(st, "secrets") and len(st.secrets) > 0:
             try:
                 self.config = {
-                    "groq_api_key": st.secrets.get("groq_api_key"),
+                    "groq_api_key": st.secrets.get("groq_api_key") or st.secrets.get("GROQ_API_KEY"),
                     "business_central": dict(st.secrets.get("business_central", {})),
                     "auth": dict(st.secrets.get("auth", {})),
                 }
